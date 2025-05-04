@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Support</title>
+      <!-- Font Awesome CDN for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    integrity="sha512-...hash..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: black;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .slide, .up {
+      width: 100%;
+      height: 20em;
+      background: white;
+      border-radius: 2em;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .slide {
+      margin-top: -3em;
+      animation: down 6s forwards ease-in-out;
+    }
+
+    .up {
+      margin-bottom: -3em;
+      animation: up 6s forwards ease-in-out;
+    }
+
+    .slide::before,
+    .up::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      right: -20px;
+      bottom: -20px;
+      background: inherit;
+      filter: blur(15px);
+      z-index: -1;
+      border-radius: inherit;
+    }
+
+    @keyframes down {
+      from {
+        transform: translateY(0);
+        height: 20em;
+        opacity: 1;
+      }
+
+      to {
+        transform: translateY(150px);
+        height: 0;
+        opacity: 0;
+      }
+    }
+
+    @keyframes up {
+      from {
+        transform: translateY(0);
+        height: 20em;
+        opacity: 1;
+      }
+
+      to {
+        transform: translateY(-150px);
+        height: 0;
+        opacity: 0;
+      }
+    }
+
+    h1 {
+      font-size: 2.2em;
+      color: white;
+      font-weight: 700;
+      text-align: center;
+      margin-top: 4em;
+      animation: titleFade 4s forwards;
+    }
+
+    @keyframes titleFade {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    p.intro {
+      font-size: 1.1em;
+      text-align: center;
+      margin-top: 1em;
+      line-height: 1.6;
+      color: #ccc;
+      animation: fadeIn 5s forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .auth-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1em;
+      margin-top: 3em;
+      flex-wrap: wrap;
+    }
+
+    .auth-buttons a {
+      padding: 0.8em 2em;
+      background: white;
+      color: black;
+      border-radius: 2em;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .auth-buttons a:hover {
+      background: #444;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 480px) {
+      .auth-buttons a {
+        width: 80%;
+        text-align: center;
+      }
+    }
+    
+    h1 {
+      font-size: 2em;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 4em;
+      background: linear-gradient(to right, #ffffff, #aaaaaa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fadeInDown 2s ease forwards;
+    }
+
+    @keyframes fadeInDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide"><h1>Brain Acedemy</h1></div>
+
+  <div id="myDIV">
+    <h1>Welcome to Your Academic Companion </h1>
+    <p class="intro">Plan smarter. Track better. Succeed together.</p>
+    
+    <div class="auth-buttons">
+       <a href="Font2.0.html" aria-label="Login to Brain Academy"><i class="fas fa-sign-in-alt"></i>Login</a>
+ <a href="Sign-in.2.html" aria-label="Sign up for Brain Academy"><i class="fas fa-user-plus"></i>Sign Up</a>
+    </div>
+  </div>
+
+  <div class="up"></div>
+</body>
+
+</html>

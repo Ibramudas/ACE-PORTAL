@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Timetable Planner</title>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+      background: black;
+      color: #000;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+      color: white;
+    }
+    .form-group {
+      margin-bottom: 10px;
+    }
+
+    .toggle-switch {
+      float: right;
+      margin-top: -50px;
+    }
+
+    /* Dark mode styles */
+    body.dark {
+      background: #121212;
+      color: #f0f0f0;
+    }
+    body.dark table,
+    body.dark th,
+    body.dark td {
+      border-color: #444;
+    }
+    
+    h2,h3,h4{
+      color: white ;
+    }
+    body.dark input,
+    body.dark select,
+    body.dark button {
+      background-color: #333;
+      color: #fff;
+      border: 1px solid #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="toggle-switch">
+    <label>
+      <input type="checkbox" id="darkToggle" onchange="toggleDarkMode()" />
+      Dark Mode
+    </label>
+  </div>
+
+  <h2>Timetable Planner</h2>
+  <h3>Create your timetable😌</h3>
+  <div class="form-group">
+    <input type="text" id="subject" placeholder="Class Name">
+    <br>
+    <br>
+    
+    <select id="day">
+      <option value="">Select Day</option>
+      <option>Monday</option>
+      <option>Tuesday</option>
+      <option>Wednesday</option>
+      <option>Thursday</option>
+      <option>Friday</option>
+    </select>
+    <h4>Starting</h4>
+    <input type="time" id="startTime">
+    <h4>Ending</h4>
+    <input type="time" id="endTime">
+    <button onclick="addClass()">Add Class</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Day</th>
+        <th>Class</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="timetableBody"></tbody>
+  </table>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      let timetable = JSON.parse(localStorage.getItem('timetable')) || [];
+
+      function addClass() {
+        const subject = document.getElementById("subject").value.trim();
+        const day = document.getElementById("day").value;
+        const start = document.getElementById("startTime").value;
+        const end = document.getElementById("endTime").value;
+
+        if (!subject || !day || !start || !end) return alert("Please fill all fields");
+
+        timetable.push({ subject, day, start, end });
+        localStorage.setItem("timetable", JSON.stringify(timetable));
+        renderTable();
+
+        // Clear inputs
+        document.getElementById("subject").value = "";
+        document.getElementById("day").value = "";
+        document.getElementById("startTime").value = "";
+        document.getElementById("endTime").value = "";
+      }
+
+      function deleteClass(index) {
+        timetable.splice(index, 1);
+        localStorage.setItem("timetable", JSON.stringify(timetable));
+        renderTable();
+      }
+
+      function renderTable() {
+        const tbody = document.getElementById("timetableBody");
+        tbody.innerHTML = "";
+        timetable.forEach((item, index) => {
+          tbody.innerHTML += `
+            <tr>
+              <td>${item.day}</td>
+              <td>${item.subject}</td>
+              <td>${item.start}</td>
+              <td>${item.end}</td>
+              <td><button onclick="deleteClass(${index})">Delete</button></td>
+            </tr>
+          `;
+        });
+      }
+
+      function toggleDarkMode() {
+        const isDark = document.body.classList.toggle("dark");
+        localStorage.setItem("darkMode", isDark);
+        document.getElementById("darkToggle").checked = isDark;
+      }
+
+      // Expose functions to window
+      window.addClass = addClass;
+      window.deleteClass = deleteClass;
+      window.toggleDarkMode = toggleDarkMode;
+
+      // Init
+      renderTable();
+      const savedDark = JSON.parse(localStorage.getItem("darkMode"));
+      if (savedDark) {
+        document.body.classList.add("dark");
+        document.getElementById("darkToggle").checked = true;
+      }
+    });
+  </script>
+</body>
+</html>

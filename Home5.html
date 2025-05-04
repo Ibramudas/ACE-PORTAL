@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #1c1c1f;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    #typewriter {
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid white;
+      animation: typing 4s steps(30, end) 1, blink .75s step-end infinite;
+      width: 0;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+
+    a:active {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body class="text-white pb-16">
+
+  <!-- Header -->
+  <header class="flex items-center justify-between p-4 bg-[#1c1c1f] border-b border-gray-700">
+    <h1 class="text-xl font-bold" id="welcome-message">Hi, <span id="username-placeholder">Guest</span></h1>
+    <img src="https://via.placeholder.com/40" alt="Profile" class="w-10 h-10 rounded-full border border-white">
+  </header>
+
+  <!-- Welcome -->
+  <section class="p-4">
+    <h2 class="text-lg font-semibold">Welcome!</h2>
+    <p class="text-sm">You have 2 assignments due. GPA: <span class="font-bold text-green-400">_-_</span></p>
+  </section>
+
+  <!-- Feature Cards -->
+  <section class="grid grid-cols-2 gap-4 p-4">
+    <div class="bg-gray-800 hover:bg-gray-700 p-4 rounded-2xl shadow text-center"><a href="cal.html">GPA Calculator</a></div>
+    <div class="bg-gray-800 hover:bg-gray-700 p-4 rounded-2xl shadow text-center"><a href="About2.html">Settings</a></div>
+    <div class="bg-gray-800 hover:bg-gray-700 p-4 rounded-2xl shadow text-center"><a href="Brain6.html">Ask Chatbot</a></div>
+     <div class="bg-gray-800 hover:bg-gray-700 p-4 rounded-2xl shadow text-center"><a href="Pdf-Documents.html">PDF Resources</a></div>
+  </section>
+
+  <!-- Typewriter Text -->
+  <section class="p-4 text-center text-sm font-mono text-gray-300">
+    <p id="typewriter">Consistency beats brilliance.</p>
+  </section>
+
+  <!-- Updates -->
+  <section class="p-4">
+    <h3 class="text-md font-semibold mb-2">Latest Updates</h3>
+    <ul class="text-sm space-y-1 text-gray-300">
+      <li>• Semester exam timetable released</li>
+      <li>• New courses added to your dashboard</li>
+    </ul>
+  </section>
+
+  <!-- Bottom Navbar -->
+  <nav class="fixed bottom-0 w-full bg-[#1c1c1f] text-white flex justify-around py-3 border-t border-gray-700 text-sm">
+    <a href="Home4.html">Home</a>
+    <a href="Brain6.html">Chat</a>
+    <a href="cal.html">GPA</a>
+    <a href="About2.html">Settings</a>
+  </nav>
+
+  <!-- Script -->
+  <script>
+    function editProfile() {
+      const newName = prompt("Enter new username:", localStorage.getItem("username") || "");
+      const newPhone = prompt("Enter new phone number:", localStorage.getItem("phone") || "");
+      if (newName) localStorage.setItem("username", newName);
+      if (newPhone) localStorage.setItem("phone", newPhone);
+      loadProfile();
+      location.reload(); // Optional if you want real-time refresh
+    }
+
+    function loadProfile() {
+      const username = localStorage.getItem("username") || "Guest";
+      document.getElementById("username-placeholder").textContent = username;
+    }
+
+    window.onload = loadProfile;
+  </script>
+</body>
+</html>

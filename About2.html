@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About</title>
+  <style>
+    :root {
+      --bg-color: #121212;
+      --text-color: #ffffff;
+      --muted-text: #aaaaaa;
+      --accent-color: #00adb5;
+      --error-color: #ff6b6b;
+      --card-bg: #1e1e1e;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      padding: 1.5rem;
+    }
+    
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.3em;
+      text-align: center;
+      animation: fadeSlide 1s ease-out forwards;
+    }
+    
+    @keyframes fadeSlide {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-top: 1.5rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    
+    .card h2 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .card p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--muted-text);
+    }
+    
+    details summary {
+      cursor: pointer;
+      font-weight: bold;
+      color: var(--accent-color);
+      margin-top: 1em;
+    }
+    
+    textarea {
+      width: 100%;
+      padding: 0.8em;
+      margin-top: 1em;
+      border-radius: 8px;
+      background-color: #2b2b2b;
+      color: var(--text-color);
+      border: 1px solid #444;
+      resize: vertical;
+    }
+    
+    button {
+      display: block;
+      margin-top: 0.8em;
+      width: 100%;
+      padding: 0.7em;
+      background-color: var(--accent-color);
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      color: var(--bg-color);
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    
+    button:hover {
+      background-color: #01c0c7;
+    }
+    
+    .links {
+      display: flex;
+      flex-direction: column;
+      margin-top: 2em;
+      gap: 1em;
+    }
+    
+    .links a {
+      text-decoration: none;
+      padding: 0.8em;
+      border-radius: 8px;
+      background-color: #2a2a2a;
+      color: var(--accent-color);
+      font-weight: bold;
+      text-align: center;
+      transition: background 0.3s ease;
+    }
+    
+    .links a:hover {
+      background-color: #333;
+    }
+    
+    .feedback-list {
+      margin-top: 1.5em;
+      font-size: 0.9rem;
+      color: var(--muted-text);
+    }
+    
+    .feedback-item {
+      background-color: #292929;
+      border-left: 4px solid var(--accent-color);
+      padding: 0.5em;
+      margin-bottom: 0.5em;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>About This App</h1>
+  
+  <div class="card">
+    <h2>Welcome</h2>
+    <p>This app is designed to support students with everything from academic planning and GPA tracking to chat assistance and study tools. We aim to make your educational journey smoother and smarter.</p>
+  </div>
+  
+  <div class="card">
+    <h2>Feedback</h2>
+    <details open>
+      <summary>Write to us...</summary>
+      <form id="feedbackForm">
+        <textarea name="feedback" id="feedback" rows="5" placeholder="Send us your feedback..."></textarea>
+        <button type="submit">Send Feedback</button>
+      </form>
+    </details>
+    <div class="feedback-list" id="feedbackList"></div>
+  </div>
+  
+  <div class="links">
+    <a href="#">Join WhatsApp Channel</a>
+    <a href="#">Report an Issue</a>
+  </div>
+  
+  <script>
+    const feedbackForm = document.getElementById('feedbackForm');
+    const feedbackInput = document.getElementById('feedback');
+    const feedbackList = document.getElementById('feedbackList');
+    
+    function loadFeedbacks() {
+      const feedbacks = JSON.parse(localStorage.getItem('userFeedbacks')) || [];
+      feedbackList.innerHTML = '';
+      feedbacks.forEach((fb, index) => {
+        const item = document.createElement('div');
+        item.className = 'feedback-item';
+        item.textContent = `${index + 1}. ${fb}`;
+        feedbackList.appendChild(item);
+      });
+    }
+    
+    feedbackForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const text = feedbackInput.value.trim();
+      if (text) {
+        const feedbacks = JSON.parse(localStorage.getItem('userFeedbacks')) || [];
+        feedbacks.push(text);
+        localStorage.setItem('userFeedbacks', JSON.stringify(feedbacks));
+        feedbackInput.value = '';
+        loadFeedbacks();
+      }
+    });
+    
+    console.log()
+    
+    // Load on page load
+    loadFeedbacks();
+    
+    
+    
+    <!-- Firebase App -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js">
+
+    
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT_ID.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  };
+
+  // Initialise Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  </script>
+</body>
+
+</html>

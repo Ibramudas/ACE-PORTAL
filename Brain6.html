@@ -1,0 +1,2071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Interactive Page</title>
+  <style>
+    html {
+      background: #1c1c1f;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+    
+    
+    h1{
+      font-size: 23px;
+      font-weight: 700;
+      margin-top: 5em;
+      text-align: center;
+    }
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-top: 2em;
+      text-align: center;
+    }
+
+    main {
+      animation: fadeInUp 1s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        transform: translateY(40px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    button {
+      font-size: 15px;
+      font-weight: 700;
+      color: white;
+      background: #333;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 10px;
+      text-align: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+
+    button svg {
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    button:hover {
+      background: #555;
+    }
+
+    p, .typewriter {
+      font-size: 16px;
+      text-align: center;
+      margin-top: 20px;
+      background: #0b0b0b;
+      border-radius: 5px;
+      padding: 10px;
+    }
+
+    .typewriter span {
+      display: inline-block;
+      overflow: hidden;
+      border-right: .15em solid orange;
+      white-space: nowrap;
+      animation: typing 3s steps(40, end), blink-caret .75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: orange; }
+    }
+
+    #Review {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      text-align: center;
+    }
+
+    .mm {
+      width: 40px;
+      height: 40px;
+      margin-top: 20px;
+    }
+
+    textarea {
+      width: 90%;
+      margin: 20px auto;
+      display: block;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    
+
+ .
+    
+   
+ 
+   
+   
+     .toolbar {
+       animation: fadeInUp 1s ease-out;
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      z-index: 1100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: white;
+      padding: 0.75rem 1rem;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #1e2746;
+      z-index: 1000;
+    }
+
+    .toolbar-title {
+      font-size: 1.3rem;
+      margin: 0;
+    }
+
+    .menu-button {
+      
+      background: none;
+      border: 1px solid white;
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.90rem;
+      margin-left: 230px;
+      margin-top: 24px;
+      animation: fadeInUp 1s ease-out;
+      position: fixed;
+      left: 1rem;
+      z-index: 1100;
+    }
+
+    .hamburger {
+      animation: fadeInUp 1s ease-out;
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      z-index: 1100;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 24px;
+      height: 18px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .hamburger span {
+      
+      height: 3px;
+      background: white;
+      border-radius: 2px;
+    }
+
+    .sidebar {
+      animation: fadeInUp 1s ease-out;
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      z-index: 1100;
+      position: fixed;
+      top: 0;
+      left: -300px;
+      height: 100%;
+      width: 150px;
+      background-color: #333;
+      color: white;
+      padding: 2rem 1rem;
+      transition: left 0.3s ease;
+      z-index: 999;
+      padding-top: 4em;
+    }
+
+    .sidebar.active {
+      
+      left: 0;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      margin: 1rem 0;
+    }
+
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.1rem;
+    }
+
+    .content {
+      padding: 5rem 1rem 1rem;
+      color: white;
+    }
+
+    .toolbar-left {
+      
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    
+     .profile-pic-container {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid #333;
+      margin-bottom: 10px;
+    }
+    .profile-pic-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    #upload-btn {
+      display: block;
+      margin-top: 10px;
+    }
+    
+    
+    
+      .nav-button {
+    width: 90%;
+    height: 3em;
+    background: linear-gradient(135deg, #A2A5A7, #D1D3D4);
+    border-radius: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    padding: 0 1em;
+    margin-bottom: 1em;
+    transform: translateX(-30px);
+    opacity: 0;
+    animation: slideIn 0.5s forwards;
+  }
+
+  @keyframes slideIn {
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1.1em;
+    text-decoration: none;
+    color: #1a1a1a;
+    transition: color 0.3s ease;
+  }
+
+  .nav-link:hover {
+    color: #000;
+  }
+
+  .nav-link svg {
+    margin-left: 0.5em;
+    fill: #1a1a1a;
+    transition: fill 0.3s ease, transform 0.3s ease;
+  }
+
+  .nav-link:hover svg {
+    fill: #000;
+    transform: scale(1.1);
+  }
+  
+  
+  
+  .question-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+}
+
+.option label {
+  margin-left: 5px;
+}
+
+#nextBtn {
+  margin-top: 15px;
+  padding: 8px 16px;
+  border: none;
+  background-color: #1c1c1f;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+  </style>
+</head>
+<body>
+    <div class="toolbar">
+    <div class="toolbar-left">
+      <p id="hamburger" class="hamburger" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </p>
+     
+    </div>
+    <p id="menu-button" class="menu-button">Main Menu</p>
+  </div>
+  
+  
+
+  <!-- Sidebar -->
+  <nav id="sidebar" class="sidebar">
+    <ul>
+      <li><a href="#" id="home-link">Home</a></li>
+      <li><a href="#" id="settings-link">Settings</a></li>
+      <li><a href="#" id="profile-link">Profile</a></li>
+    </ul>
+  </nav>
+
+
+  
+</div>
+
+  <!-- Page Content -->
+  <div class="content" id="display-area">
+  <main>
+   
+  
+   <!-- <div class="toolbar">
+  <label for="bg-color-picker">Background:</label>
+  <input type="color" id="bg-color-picker">
+
+  <label for="font-size-selector">Font:</label>
+  <select id="font-size-selector">
+    <option value="small">Small</option>
+    <option value="medium" selected>Medium</option>
+    <option value="large">Large</option>
+  </select>
+
+  <button id="theme-toggle">Dark Mode</button>
+  <button id="reset-color">Reset</button>
+</div>-->
+<!--
+<div class="function-bar">
+  <button class="hamburger" id="menu-toggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <span class="title">Change Settings</span>
+</div>-->
+   
+     <!--  <section class="profile">
+  <h2>Your Profile</h2>
+  <p><strong>Username:</strong> <span id="profile-name"></span></p>
+  <p><strong>Phone:</strong> <span id="profile-phone"></span></p>
+  <button onclick="editProfile()">Edit Info</button>
+</section>-->
+
+<!-- <svg class="mm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+   
+      <path d="M4 11h12v2H4zm0-5h16v2H4zm0 12h7.235v-2H4z"/>
+    </svg>-->
+    <section class="home">
+      
+    
+     <h1 id="welcome-message"><h1 id="username-placeholder"></h1><span id="username-placeholder"></span></h1>
+       
+     <h2>So what do you wanna do?</h2>
+<button onclick="
+  const randomNumber = Math.random();
+  const message = randomNumber <  1
+    ? 'Okay...Let\'s review questions' 
+    : 'Oga... go rest joor 🌚😅... come and read later';
+  const callback = message === 'Okay...Let\'s review questions' 
+    ? () => showSubjects() 
+    : () => {};
+  typeWriterEffect('Review', message, callback);
+">
+  Review Past Questions
+  <svg xmlns='http://www.w3.org/2000/svg' width='24' height='20'>
+    <path d='M6.012 18H21V4a2 2 0 0 0-2-2H6c-1.206 0-3 .799-3 3v14c0 2.201 1.794 3 3 3h15v-2H6.012C5.55 19.988 5 19.805 5 19s.55-.988 1.012-1zM8 6h9v2H8V6z' />
+  </svg>
+</button>
+
+    <button onclick="chatFunction()">
+      Chat
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="20"><path d="M16 14h.5c.827 0 1.5-.673 1.5-1.5v-9c0-.827-.673-1.5-1.5-1.5h-13C2.673 2 2 2.673 2 3.5V18l5.333-4H16zm-9.333-2L4 14V4h12v8H6.667z"/><path d="M20.5 8H20v6.001c0 1.1-.893 1.993-1.99 1.999H8v.5c0 .827.673 1.5 1.5 1.5h7.167L22 22V9.5c0-.827-.673-1.5-1.5-1.5z"/></svg>
+    </button>
+
+    <button onclick="typeWriterEffect('get', 'Uniosun Gist 😆')">Entertainment</button>
+
+<form action="plans.html" method="get" accept-charset="utf-8">
+      <button>Plans</button>
+    </form>
+    
+    <button onclick="showUniosunInfo()">Uniosun info
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="20"><path d="M3 4v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1zm8 3h2v2h-2V7zm0 4h2v6h-2v-6z"/></svg>
+    </button>
+    
+     
+    <button onclick="getPDF()">Get PDF
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="20"><path d="M21 8c-.202 0-4.85.029-9 2.008C7.85 8.029 3.202 8 3 8a1 1 0 0 0-1 1v9.883a1 1 0 0 0 .305.719c.195.188.48.305.729.28l.127-.001c.683 0 4.296.098 8.416 2.025.016.008.034.005.05.011.119.049.244.083.373.083s.254-.034.374-.083c.016-.006.034-.003.05-.011 4.12-1.928 7.733-2.025 8.416-2.025l.127.001c.238.025.533-.092.729-.28.194-.189.304-.449.304-.719V9a1 1 0 0 0-1-1zM4 10.049c1.485.111 4.381.48 7 1.692v7.742c-3-1.175-5.59-1.494-7-1.576v-7.858zm16 7.858c-1.41.082-4 .401-7 1.576v-7.742c2.619-1.212 5.515-1.581 7-1.692v7.858z"/><circle cx="12" cy="5" r="3"/></svg>
+    </button>
+    
+      <button onclick="mofe()">About us<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+</button>
+    <form action="cal.html"method="get" accept-charset="utf-8">
+    <button>Cal GPA<svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 24 24"><path d="M6 22h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zm3-3H7v-2h2v2zm0-4H7v-2h2v2zm0-4H7V9h2v2zm4 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm4 8h-2v-6h2v6zm0-8h-2V9h2v2zM6 4h12v3H6V4z"/></svg>
+</button>
+    </form>
+   
+    <p id="Review"></p>
+    <p class="get"></p>
+    <p class="chat"></p>
+
+    <button onclick="clearConvo()">Clear Conv</button>
+    <button onclick="logoutUser()">Log Out</button>
+  <!--  <label for="bg-color-picker">Choose background colour:</label>
+<input type="color" id="bg-color-picker">-->
+<!--<div style="padding: 1rem;">
+  <label for="bg-color-picker" style="display: block; margin-bottom: 0.5rem;">
+    Choose background colour:
+  </label>
+  <input type="color" id="bg-color-picker" style="width: 100%; max-width: 200px;">
+  <button id="reset-color" style="margin-top: 1rem;">Reset to Default</button>
+</div>-->
+</section>
+  </main>
+  </div>
+
+  <script>
+const hamburger = document.getElementById('hamburger');
+    const sidebar = document.getElementById('sidebar');
+    const homeLink = document.getElementById('home-link');
+    const settingsLink = document.getElementById('settings-link');
+    const profileLink = document.getElementById('profile-link');
+    const displayArea = document.getElementById('display-area');
+    const menuButton = document.getElementById('menu-button');
+
+    hamburger.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+    });
+
+    homeLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      displayArea.innerHTML = `<h2>Home</h2><p>Welcome back to the home screen! Here you’ll find an overview of everything important.</p>`;
+      sidebar.classList.remove('active');
+    });
+
+    settingsLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      displayArea.innerHTML = `
+
+      
+      <div class="nav-button">
+  <a href="About.html" class="nav-link">
+    About
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 24 24">
+      <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+    </svg>
+    
+  </a>
+</div>`;
+      sidebar.classList.remove('active');
+    });
+
+    profileLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      displayArea.innerHTML = `<h2>Choose Your Profile Picture</h2>
+  <div class="profile-pic-container">
+    <img id="profile-preview" src="default.jpg" alt="Profile Picture">
+  </div>
+
+  <input type="file" id="file-input" accept="image/*">
+  <button id="upload-btn">Save Picture</button>
+  <button id="remove-btn">Remove Picture</button>
+
+`;const fileInput = document.getElementById('file-input');
+    const preview = document.getElementById('profile-preview');
+    const defaultPic = 'default.jpg';
+
+    fileInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          preview.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    document.getElementById('upload-btn').addEventListener('click', () => {
+      localStorage.setItem('profilePic', preview.src);
+      alert('Profile picture saved!');
+    });
+
+    document.getElementById('remove-btn').addEventListener('click', () => {
+      preview.src = defaultPic;
+      localStorage.removeItem('profilePic');
+      alert('Profile picture removed!');
+    });
+
+    // Load saved picture if available
+    const savedPic = localStorage.getItem('profilePic');
+    if (savedPic) {
+      preview.src = savedPic;
+    }});
+
+    menuButton.addEventListener('click', () => {
+      displayArea.innerHTML = `
+      <main>
+   
+  
+   <!-- <div class="toolbar">
+  <label for="bg-color-picker">Background:</label>
+  <input type="color" id="bg-color-picker">
+
+  <label for="font-size-selector">Font:</label>
+  <select id="font-size-selector">
+    <option value="small">Small</option>
+    <option value="medium" selected>Medium</option>
+    <option value="large">Large</option>
+  </select>
+
+  <button id="theme-toggle">Dark Mode</button>
+  <button id="reset-color">Reset</button>
+</div>-->
+<!--
+<div class="function-bar">
+  <button class="hamburger" id="menu-toggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <span class="title">Change Settings</span>
+</div>-->
+   
+     <!--  <section class="profile">
+  <h2>Your Profile</h2>
+  <p><strong>Username:</strong> <span id="profile-name"></span></p>
+  <p><strong>Phone:</strong> <span id="profile-phone"></span></p>
+  <button onclick="editProfile()">Edit Info</button>
+</section>-->
+
+<!-- <svg class="mm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+   
+      <path d="M4 11h12v2H4zm0-5h16v2H4zm0 12h7.235v-2H4z"/>
+    </svg>-->
+    <section class="home">
+      
+    
+     <h1 id="welcome-message"><h1 id="username-placeholder"></h1><span id="username-placeholder"></span></h1>
+       
+     <h2>So what do you wanna do?</h2>
+<button onclick="
+  past();
+">
+  Review Past Questions
+  <svg xmlns='http://www.w3.org/2000/svg' width='24' height='20'>
+    <path d='M6.012 18H21V4a2 2 0 0 0-2-2H6c-1.206 0-3 .799-3 3v14c0 2.201 1.794 3 3 3h15v-2H6.012C5.55 19.988 5 19.805 5 19s.55-.988 1.012-1zM8 6h9v2H8V6z' />
+  </svg>
+</button>
+   
+
+    <button onclick="chatFunction()">
+      Chat
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="20"><path d="M16 14h.5c.827 0 1.5-.673 1.5-1.5v-9c0-.827-.673-1.5-1.5-1.5h-13C2.673 2 2 2.673 2 3.5V18l5.333-4H16zm-9.333-2L4 14V4h12v8H6.667z"/><path d="M20.5 8H20v6.001c0 1.1-.893 1.993-1.99 1.999H8v.5c0 .827.673 1.5 1.5 1.5h7.167L22 22V9.5c0-.827-.673-1.5-1.5-1.5z"/></svg>
+    </button>
+
+    <button onclick="typeWriterEffect('get', 'Uniosun Gist 😆')">Entertainment</button>
+
+<form action="plans.html" method="get" accept-charset="utf-8">
+      <button>Plans</button>
+    </form>
+    
+    <button onclick="showUniosunInfo()">Uniosun info
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="20"><path d="M3 4v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1zm8 3h2v2h-2V7zm0 4h2v6h-2v-6z"/></svg>
+    </button>
+    
+     
+    <button onclick="getPDF()">Get PDF
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="20"><path d="M21 8c-.202 0-4.85.029-9 2.008C7.85 8.029 3.202 8 3 8a1 1 0 0 0-1 1v9.883a1 1 0 0 0 .305.719c.195.188.48.305.729.28l.127-.001c.683 0 4.296.098 8.416 2.025.016.008.034.005.05.011.119.049.244.083.373.083s.254-.034.374-.083c.016-.006.034-.003.05-.011 4.12-1.928 7.733-2.025 8.416-2.025l.127.001c.238.025.533-.092.729-.28.194-.189.304-.449.304-.719V9a1 1 0 0 0-1-1zM4 10.049c1.485.111 4.381.48 7 1.692v7.742c-3-1.175-5.59-1.494-7-1.576v-7.858zm16 7.858c-1.41.082-4 .401-7 1.576v-7.742c2.619-1.212 5.515-1.581 7-1.692v7.858z"/><circle cx="12" cy="5" r="3"/></svg>
+    </button>
+    
+      <button onclick="mofe()">About us<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+</button>
+    <form action="cal.html"method="get" accept-charset="utf-8">
+    <button>Cal GPA<svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 24 24"><path d="M6 22h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zm3-3H7v-2h2v2zm0-4H7v-2h2v2zm0-4H7V9h2v2zm4 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm4 8h-2v-6h2v6zm0-8h-2V9h2v2zM6 4h12v3H6V4z"/></svg>
+</button>
+
+    </form>
+   
+    <p id="Review"></p>
+    <p class="get"></p>
+    <p class="chat"></p>
+
+
+    <button onclick="clearConvo()">Clear Conv</button>
+    <button onclick="logoutUser()">Log Out</button>
+  <!--  <label for="bg-color-picker">Choose background colour:</label>
+<input type="color" id="bg-color-picker">-->
+<!--<div style="padding: 1rem;">
+  <label for="bg-color-picker" style="display: block; margin-bottom: 0.5rem;">
+    Choose background colour:
+  </label>
+  <input type="color" id="bg-color-picker" style="width: 100%; max-width: 200px;">
+  <button id="reset-color" style="margin-top: 1rem;">Reset to Default</button>
+</div>-->
+</section>
+  </main>
+  </div>
+`;
+      sidebar.classList.remove('active');
+    });
+  
+  
+  
+  
+  
+  
+  
+  
+ function mofe(){
+   document.querySelector('.get').innerHTML=`<a href="About 2.html" style="color: blue;"><strong>About us</strong></a>`;
+ }
+function loadProfile() {
+  const name = localStorage.getItem("username") || "N/A";
+  const phone = localStorage.getItem("phone") || "N/A";
+  document.getElementById("profile-name").textContent = name;
+  document.getElementById("profile-phone").textContent = phone;
+}
+
+function editProfile() {
+  const newName = prompt("Enter new username:", localStorage.getItem("username") || "");
+  const newPhone = prompt("Enter new phone number:", localStorage.getItem("phone") || "");
+  if (newName) localStorage.setItem("username", newName);
+  if (newPhone) localStorage.setItem("phone", newPhone);
+  loadProfile();
+  location.reload(); // refresh to update greeting too
+}
+
+window.onload = function() {
+  loadProfile();
+  // Add your greeting logic here too
+};
+  window.onload = function () {
+    const username = localStorage.getItem("username");
+    if (username) {
+      document.getElementById("username-placeholder").textContent = username;
+    } else {
+      document.getElementById("username-placeholder").textContent = "Guest";
+    }
+  };
+
+  window.onload = function () {
+    const username = localStorage.getItem("username") || "Guest";
+    
+    const hour = new Date().getHours();
+    let greeting = "Hello";
+
+    if (hour >= 5 && hour < 12) greeting = "Good morning";
+    else if (hour >= 12 && hour < 17) greeting = "Good afternoon";
+    else if (hour >= 17 && hour < 22) greeting = "Good evening";
+    else greeting = "You’re still up?";
+
+    document.getElementById("username-placeholder").textContent = `${greeting}, ${username} 🤍`;
+  };
+     
+     function past() {
+const randomNumber = Math.random();
+  const message = randomNumber < 0.95
+    ? 'Okay...Let\'s review questions' 
+    : 'Oga... go rest joor 🌚😅... come and read later';
+  const callback = message === 'Okay...Let\'s review questions' 
+    ? () => showSubjects() 
+    : () => {};
+  typeWriterEffect('Review', message, callback);
+     }
+
+    /*alert('My creator Mr. Emmanuel is still updating me, but I am always active!');
+*/
+
+    function typeWriterEffect(targetClass, message, callback) {
+      const container = document.querySelector(`.${targetClass}`) || document.getElementById(targetClass);
+      container.innerHTML = '';
+      const span = document.createElement('span');
+      container.appendChild(span);
+
+      let index = 0;
+      function type() {
+        if (index < message.length) {
+          span.textContent += message.charAt(index);
+          index++;
+          setTimeout(type, 50);
+        } else if (callback) {
+          callback();
+        }
+      }
+      type();
+    }
+    
+    function calgpa() {
+  document.querySelector('.get').innerHTML = `
+  <form id="gpaForm">
+    <div id="courseInputs">
+      <div class="courseInput">
+      <div>
+        <label style="font-size: 16px" for="course1">Course 1 Name:</label>
+    
+        <input style="height: 10px;" type="text" id="course1" name="course1" required>
+          
+         </div>
+         <div>
+        <label style="font-size: 14px" for="grade1">Grade (A,B,C, etc.):</label>
+        <input style="height: 10px" type="text" id="grade1" name="grade1" required>
+      </div>
+      <div>
+        <label style="font-size: 16px" for="credit1">Credit Hours:</label>
+        <input style="height: 10px" type="number" id="credit1" name="credit1" required>
+        </div>
+      </div>
+
+      <div class="courseInput">
+      <div>
+        <label style="font-size: 16px" for="course2">Course 2 Name:</label>
+        <input style="height: 10px" type="text" id="course2" name="course2" required>
+        </div>
+        <div>
+        <label style="font-size: 14px" for="grade2">Grade (A, B, C, etc.):</label>
+        <input style="height: 10px" type="text" id="grade2" name="grade2" required>
+        </div>
+        <div>
+        <label style="font-size: 16px" for="credit2">Credit Hours:</label>
+        <input style="height: 10px" type="number" id="credit2" name="credit2" required>
+        </div>
+      </div>
+
+      <div class="courseInput">
+      <div>
+        <label style="font-size: 16px" for="course3">Course 3 Name:</label>
+        <input style="height: 10px" type="text" id="course3" name="course3" required>
+        </div>
+        <div>
+        <label style="font-size: 14px" for="grade3">Grade (A, B, C, etc.):</label>
+        <input style="height: 10px" type="text" id="grade3" name="grade3" required>
+        </div>
+        <div>
+        <label style="font-size: 16px" for="credit3">Credit Hours:</label>
+        <input style="height: 10px" type="number" id="credit3" name="credit3" required>
+        </div>
+      </div>
+       <div class="courseInput">
+      <div>
+        <label style="font-size: 16px" for="course3">Course 3 Name:</label>
+        <input style="height: 10px" type="text" id="course4" name="course4" required>
+        </div>
+        <div>
+        <label style="font-size: 14px" for="grade3">Grade (A, B, C, etc.):</label>
+        <input style="height: 10px" type="text" id="grade3" name="grade3" required>
+        </div>
+        <div>
+        <label style="font-size: 16px" for="credit3">Credit Hours:</label>
+        <input style="height: 10px" type="number" id="credit3" name="credit3" required>
+        </div>
+      </div>
+      <label style="font-size: 16px" for="course3">Course 3 Name:</label>
+        <input style="height: 10px" type="text" id="course5" name="course5" required>
+        </div>
+        <div>
+        <label style="font-size: 14px" for="grade3">Grade (A, B, C, etc.):</label>
+        <input style="height: 10px" type="text" id="grade3" name="grade3" required>
+        </div>
+        <div>
+        <label style="font-size: 16px" for="credit3">Credit Hours:</label>
+        <input style="height: 10px" type="number" id="credit3" name="credit3" required>
+        </div>
+      </div>
+      <label style="font-size: 16px" for="course3">Course 3 Name:</label>
+        <input style="height: 10px" type="text" id="course5" name="course5" required>
+        </div>
+        <div>
+        <label style="font-size: 14px" for="grade3">Grade (A, B, C, etc.):</label>
+        <input style="height: 10px" type="text" id="grade3" name="grade3" required>
+        </div>
+        <div>
+        <label style="font-size: 16px" for="credit3">Credit Hours:</label>
+        <input style="height: 10px" type="number" id="credit3" name="credit3" required>
+        </div>
+      </div>
+      <label style="font-size: 16px" for="course3">Course 3 Name:</label>
+        <input style="height: 10px" type="text" id="course7" name="course7" required>
+        </div>
+        <div>
+        <label style="font-size: 14px" for="grade3">Grade (A, B, C, etc.):</label>
+        <input style="height: 10px" type="text" id="grade3" name="grade3" required>
+        </div>
+        <div>
+        <label style="font-size: 16px" for="credit3">Credit Hours:</label>
+        <input style="height: 10px" type="number" id="credit3" name="credit3" required>
+        </div>
+      </div>
+    </div>
+    
+    <button type="button" onclick="calculateGPA()">Calculate GPA</button>
+  </form>
+
+  <h3 id="gpaResult"></h3>
+  `;
+}
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+function showSubjects() {
+  setTimeout(() => {
+    document.getElementById("Review").innerHTML += `
+      <button onclick="question()">CHM 102</button>
+      <button onclick="phyQuestions()">PHY 102</button>
+      <button onclick="mathsQuestions()">MTH 102</button>
+      <button onclick="gnsQuestions()">GNS 111</button>
+      <button onclick="bioQuestions()">Bio 102</button>
+    `;
+  }, 1000);
+}
+
+function question() {
+  const questions = [
+    {
+      question: "Which of the following is the main source of hydrocarbon?",
+      options: ["Natural gas", "Coal", "Sunlight", "Carbon"],
+      correct: "Natural gas"
+    },
+    {
+      question: "A substance from petroleum containing carbon atoms ranging from 5 to 10 is?",
+      options: ["Kerosene", "Petrol", "Bitumen", "Lubricating oil"],
+      correct: "Petrol"
+    },
+    {
+      question: "Which of the following is the most stable alkene?",
+      options: ["1-hexene", "trans-3-hexene", "cis-3-hexene", "(Z)-3-hexene"],
+      correct: "trans-3-hexene"
+    },
+    {
+      question: "n-propyl iodide reacts with sodium ethoxide to give?",
+      options: ["CH3OCH2CH2CH3", "CH3CH2OCH3", "CH3CH2OCH2CH3", "CH3CH2OCH2CH2CH3"],
+      correct: "CH3CH2OCH2CH2CH3"
+    },
+    {
+      question: "How is the IUPAC name arranged?",
+      options: ["root+suffix+infix+prefix", "suffix+infix+root+prefix", "prefix+infix+root+suffix", "infix+suffix+prefix+root"],
+      correct: "prefix+infix+root+suffix"
+    },
+    {
+      question: "What is ester made of?",
+      options: ["Alkane and amide", "Alkyne and ketone", "Alkanol and Carboxylic acid", "None"],
+      correct: "Alkanol and Carboxylic acid"
+    },
+    {
+      question: "What is the formula for amides?",
+      options: ["RCONH2", "RNH2", "RCOONH3", "RNH3"],
+      correct: "RCONH2"
+    },
+    {
+      question: "Which of the following is NOT a characteristic of hydrocarbons?",
+      options: ["Inflammable", "High reactivity", "Low melting and boiling point", "None of the above"],
+      correct: "High reactivity"
+    },
+    {
+      question: "Which alkyl halides react most readily by nucleophilic substitute?",
+      options: ["CH3CH2CL", "CH3CH2F", "CH3CH2I", "CH3CH2Br"],
+      correct: "CH3CH2I"
+    },
+    {
+      question: "Which of the following is the best leaving group?",
+      options: ["F-", "Br-", "I-", "Cl-"],
+      correct: "I-"
+    },
+    {
+      question: "Which of the following undergoes nucleophilic substitution most readily?",
+      options: ["Methyl chloride", "Tertiary butyl chloride", "Chlorobenzene", "Vinyl chloride"],
+      correct: "Tertiary butyl chloride"
+    },
+    {
+      question: "What is the correct order of reactivity in SN1 reaction?",
+      options: ["Tertiary > Secondary > Primary", "Primary > Secondary > Tertiary", "Secondary > Tertiary > Primary", "Tertiary > Primary > Secondary"],
+      correct: "Tertiary > Secondary > Primary"
+    },
+    {
+      question: "Which of the following compounds is aromatic?",
+      options: ["Cyclobutadiene", "Cyclohexane", "Benzene", "Cyclooctatetraene"],
+      correct: "Benzene"
+    },
+    {
+      question: "Which of these is not an isomer of C4H10?",
+      options: ["n-Butane", "Isobutane", "Cyclobutane", "2-Methylpropane"],
+      correct: "Cyclobutane"
+    },
+    {
+      question: "What is the IUPAC name of CH3CH2COOH?",
+      options: ["Propanoic acid", "Ethanoic acid", "Butanoic acid", "Methanoic acid"],
+      correct: "Propanoic acid"
+    },
+    {
+      question: "Which reagent is used for the oxidation of alcohols?",
+      options: ["KMnO4", "NaOH", "HCl", "NH3"],
+      correct: "KMnO4"
+    },
+    {
+      question: "What is the hybridisation of carbon in ethene?",
+      options: ["sp", "sp2", "sp3", "dsp2"],
+      correct: "sp2"
+    },
+    {
+      question: "Which of the following is the most acidic?",
+      options: ["Phenol", "Ethanol", "Acetic acid", "Methane"],
+      correct: "Acetic acid"
+    },
+    {
+      question: "What is the product of dehydration of ethanol?",
+      options: ["Ethene", "Methane", "Acetylene", "Ethanol"],
+      correct: "Ethene"
+    },
+    {
+      question: "Which functional group is present in aldehydes?",
+      options: ["-COOH", "-CHO", "-OH", "-COO-"],
+      correct: "-CHO"
+    },
+    {
+      question: "Which of the following undergoes electrophilic substitution?",
+      options: ["Alkanes", "Alkenes", "Alkynes", "Aromatic compounds"],
+      correct: "Aromatic compounds"
+    },
+    {
+      question: "What is the general formula for alkanes?",
+      options: ["CnH2n-2", "CnH2n", "CnH2n+2", "CnH2n+1"],
+      correct: "CnH2n+2"
+    }
+  ];
+
+  let current = 0;
+  let score = 0;
+  const userAnswers = [];
+  let timer;
+  let timeLeft = 60;
+
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  function typeWriter(id, text, done) {
+    let i = 0;
+    const el = document.getElementById(id);
+    el.innerHTML = '';
+    function typing() {
+      if (i < text.length) {
+        el.innerHTML += text.charAt(i++);
+        setTimeout(typing, 30);
+      } else {
+        done();
+      }
+    }
+    typing();
+  }
+
+  function startTimer() {
+    clearInterval(timer);
+    timeLeft = 60;
+    const timerEl = document.createElement("div");
+    timerEl.id = "timer";
+    timerEl.style.fontWeight = "bold";
+    document.getElementById("Review").prepend(timerEl);
+    document.getElementById("timer").innerText = `Time left: ${timeLeft}s`;
+    
+    
+    
+
+
+
+    
+    
+
+    timer = setInterval(() => {
+      timeLeft--; document.getElementById("timer").innerText = `Time left: ${timeLeft}s`;
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        next();
+      }
+    }, 1000);
+  }
+
+  function stopTimer() {
+    clearInterval(timer);
+  }
+
+  function clearTimerDisplay() {
+    const timerEl = document.getElementById("timer");
+    if (timerEl) timerEl.remove();
+  }
+
+  function loadQuestion() {
+    const q = questions[current];
+    document.getElementById("Review").innerHTML = '';
+    typeWriter("Review", `Q${current + 1}. ${q.question}`, () => {
+      const box = document.createElement("div");
+      box.className = "question-box";
+
+      q.options.forEach((opt, idx) => {
+        box.innerHTML += `
+          <div class="option">
+            <input type="radio" id="opt${idx}" name="option" value="${opt}">
+            <label for="opt${idx}">${opt}</label>
+          </div>`;
+      });
+
+      box.innerHTML += `<button id="nextBtn">Next</button>`;
+      document.getElementById("Review").appendChild(box);
+      document.getElementById("nextBtn").addEventListener("click", next);
+      startTimer();
+    });
+  }
+
+  function next() {
+    stopTimer();
+    const selected = document.querySelector('input[name="option"]:checked');
+    const answer = selected ? selected.value : null;
+    userAnswers.push(answer);
+    if (answer === questions[current].correct) score++;
+    current++;
+    current < questions.length ? loadQuestion() : showScore();
+  }
+
+  function showScore() {
+    clearTimerDisplay();
+    let result = `<h3>You scored ${score} out of ${questions.length}</h3>`;
+    result += "<h4>Correct Answers:</h4><ol>";
+    questions.forEach((q, i) => {
+      result += `<li>${q.question}<br><strong>Answer:</strong> ${q.correct}</li>`;
+    });
+    result += "</ol>";
+    document.getElementById("Review").innerHTML = result;
+  }
+
+  // Prepare and shuffle questions
+  shuffle(questions);
+  const selectedQuestions = questions.slice(0, 20);
+  selectedQuestions.forEach(q => shuffle(q.options));
+  questions.length = 0;
+  questions.push(...selectedQuestions);
+
+  loadQuestion();
+};
+
+
+function calculateGPA() {
+      const grades = {
+        "A": 5.0,
+        "B": 4.0,
+        "C": 3.0,
+        "D": 2.0,
+        "E": 1.0,
+        "F": 0.0
+      };
+
+      let totalCredits = 0;
+      let weightedGrades = 0;
+      let validInput = true;
+
+      for (let i = 1; i <= 3; i++) {
+        const courseName = document.getElementById(`course${i}`).value;
+        const grade = document.getElementById(`grade${i}`).value.toUpperCase();
+        const credit = parseInt(document.getElementById(`credit${i}`).value);
+
+        if (courseName && grades[grade] !== undefined && !isNaN(credit) && credit > 0) {
+          totalCredits += credit;
+          weightedGrades += grades[grade] * credit;
+        } else {
+          validInput = false;
+          alert(`Please check the input for Course ${i}. Ensure valid grade and credit hours.`);
+          break;
+        }
+      }
+
+      if (validInput && totalCredits > 0) {
+        const gpa = weightedGrades / totalCredits;
+        document.getElementById('gpaResult').innerHTML = `Your GPA is: ${gpa.toFixed(2)}`;
+      } else {
+        document.getElementById('gpaResult').innerHTML = 'Please fill in all the fields correctly.';
+      }
+    }
+    
+
+
+    
+
+    function chatFunction() {
+      alert("Let's chat!");
+      typeWriterEffect("chat","Wanna message Mr Emmanuel? ");
+      
+      setTimeout(() => {
+        document.querySelector('.chat').innerHTML += `\n<a href="tel:+2347014697789">+2347014697789</a>`;
+      }, 1300);
+    }
+    
+    
+    
+    function mathsQuestions() {
+  typeWriterEffect("Review", "1.What is the second derivative for 2x⁴-6x?", () => {
+    document.getElementById("Review").innerHTML += `
+      <div style="text-align: left; margin-top: 15px;">
+        <div style="margin-bottom: 10px;">
+          <input type="radio" id="option1" name="option" value="8x³-6">
+          <label for="option1">8x³-6</label>
+        </div>
+        <div style="margin-bottom: 10px;">
+          <input type="radio" id="option2" name="option" value="24x²">
+          <label for="option2">24x²</label>
+        </div>
+        <div style="margin-bottom: 10px;">
+          <input type="radio" id="option3" name="option" value="48x">
+          <label for="option3">48x</label>
+        </div>
+          <div>
+          <input type="radio" id="option4" name="option" value="24x³">
+          <label for="option4">24x³</label>
+        </div>
+      </div>
+      <button onclick="question2()">Next</button>
+    `;
+  });
+}
+
+
+    function showUniosunInfo() {
+      document.querySelector('.get').innerHTML = `
+        <p>Visit Uniosun Portal: <a href="https://uniosun.edu.ng" target="_blank">uniosun.edu.ng</a></p>
+      `;
+    }
+    
+    
+    
+    function phyQuestions() {
+  const questions = [
+  {
+    question: "What is the direction of the force on a moving positive charge in a magnetic field?",
+    options: ["Parallel to velocity", "Opposite to magnetic field", "Perpendicular to both velocity and magnetic field", "Along magnetic field lines"],
+    correct: "Perpendicular to both velocity and magnetic field"
+  },
+  {
+    question: "Which condition must be satisfied for a charged particle to move in a circular path in a uniform magnetic field?",
+    options: ["Field parallel to velocity", "No electric field present", "Centripetal force equals magnetic force", "Velocity equals speed of light"],
+    correct: "Centripetal force equals magnetic force"
+  },
+  {
+    question: "A 2 C charge moves through a potential difference of 12 V. What is the energy gained?",
+    options: ["6 J", "24 J", "10 J", "12 J"],
+    correct: "24 J"
+  },
+  {
+    question: "Calculate the electric field between two parallel plates 0.02 m apart with a potential difference of 1000 V.",
+    options: ["2 x 10⁴ V/m", "5 x 10³ V/m", "1 x 10⁴ V/m", "2 x 10³ V/m"],
+    correct: "5 x 10⁴ V/m"
+  },
+  {
+    question: "A 3 Ω resistor carries a current of 4 A. What is the power dissipated?",
+    options: ["12 W", "36 W", "48 W", "16 W"],
+    correct: "48 W"
+  },
+  {
+    question: "If a 5 m wire carries 10 A in a 0.3 T field at 90°, what is the magnetic force?",
+    options: ["15 N", "1.5 N", "0.15 N", "150 N"],
+    correct: "15 N"
+  },
+  {
+    question: "Find the resistance of a circuit with 12 V and current of 0.5 A.",
+    options: ["24 Ω", "6 Ω", "0.6 Ω", "18 Ω"],
+    correct: "24 Ω"
+  },
+  {
+    question: "A 20 µF capacitor is charged to 10 V. What is the energy stored?",
+    options: ["1 mJ", "2 mJ", "1 J", "0.001 J"],
+    correct: "1 mJ"
+  },
+  {
+    question: "A coil with inductance 0.5 H carries 3 A. Find the stored magnetic energy.",
+    options: ["2.25 J", "0.75 J", "1.5 J", "1.0 J"],
+    correct: "2.25 J"
+  },
+  {
+    question: "What is the current in a 200 W, 220 V appliance?",
+    options: ["0.91 A", "1.1 A", "2.0 A", "1.5 A"],
+    correct: "0.91 A"
+  },
+  {
+    question: "Calculate the magnetic flux through a coil of 5 turns and area 0.02 m² in a 0.1 T field.",
+    options: ["0.01 Wb", "0.005 Wb", "0.1 Wb", "0.02 Wb"],
+    correct: "0.01 Wb"
+  },
+  {
+    question: "A transformer has 500 turns on the primary and 50 on the secondary. What is the turns ratio?",
+    options: ["1:10", "10:1", "5:1", "1:5"],
+    correct: "10:1"
+  },
+  {
+    question: "A 10 m wire with resistance 2 Ω/m is connected to a 100 V source. What is the current?",
+    options: ["2.5 A", "5 A", "1 A", "10 A"],
+    correct: "5 A"
+  },
+  {
+    question: "What is the peak voltage of an a.c. supply with an rms voltage of 230 V?",
+    options: ["325 V", "230 V", "460 V", "115 V"],
+    correct: "325 V"
+  },
+  {
+    question: "If a current of 2 A flows for 3 minutes, how much charge has passed?",
+    options: ["360 C", "180 C", "6 C", "600 C"],
+    correct: "360 C"
+  },
+  {
+    question: "A particle with charge 1.6 x 10⁻¹⁹ C moves at 2 x 10⁶ m/s perpendicular to a 0.5 T field. Find the force.",
+    options: ["1.6 x 10⁻¹³ N", "1.0 x 10⁻¹³ N", "2 x 10⁻¹³ N", "0.8 x 10⁻¹³ N"],
+    correct: "1.6 x 10⁻¹³ N"
+  },
+  {
+    question: "What is the capacitive reactance of a 10 µF capacitor at 50 Hz?",
+    options: ["318 Ω", "159 Ω", "637 Ω", "100 Ω"],
+    correct: "318 Ω"
+  },
+  {
+    question: "A solenoid with 1000 turns and length 2 m carries 3 A. Find magnetic field inside.",
+    options: ["1.88 x 10⁻³ T", "1.5 x 10⁻³ T", "6 x 10⁻⁴ T", "2 x 10⁻³ T"],
+    correct: "1.88 x 10⁻³ T"
+  },
+  {
+    question: "A current of 0.2 A flows through a 1000 Ω resistor for 2 minutes. What is the heat produced?",
+    options: ["48 J", "24 J", "96 J", "12 J"],
+    correct: "48 J"
+  },
+  {
+    question: "Calculate the impedance of a 3 Ω resistor and 4 Ω reactance in series.",
+    options: ["5 Ω", "7 Ω", "4.5 Ω", "1 Ω"],
+    correct: "5 Ω"
+  },
+  {
+    question: "Find current in a circuit with 120 V and impedance of 10 Ω.",
+    options: ["12 A", "1.2 A", "10 A", "0.1 A"],
+    correct: "12 A"
+  },
+  {
+    question: "Determine the charge stored by a 50 µF capacitor at 20 V.",
+    options: ["1 mC", "10 mC", "0.01 C", "1000 µC"],
+    correct: "1 mC"
+  },
+  {
+    question: "What is the unit of magnetic flux density?",
+    options: ["Tesla", "Weber", "Henry", "Farad"],
+    correct: "Tesla"
+  },
+  {
+    question: "The magnetic field at the center of a circular loop carrying current I is directly proportional to:",
+    options: ["I and radius", "I and inversely proportional to radius", "I squared and radius", "Inversely proportional to I and radius"],
+    correct: "I and inversely proportional to radius"
+  },
+  {
+    question: "An electron moving perpendicular to a uniform magnetic field describes which motion?",
+    options: ["Linear", "Helical", "Circular", "Oscillatory"],
+    correct: "Circular"
+  },
+  {
+    question: "Which component of a magnetic field causes no deflection of a moving charge?",
+    options: ["Perpendicular", "Tangential", "Parallel", "Radial"],
+    correct: "Parallel"
+  },
+  {
+    question: "The force on a current-carrying conductor in a magnetic field is maximum when the conductor is:",
+    options: ["Parallel to field", "At 45 degrees to field", "Perpendicular to field", "At rest"],
+    correct: "Perpendicular to field"
+  },
+  {
+    question: "Which law states that the induced emf is proportional to the rate of change of magnetic flux?",
+    options: ["Lenz's Law", "Ohm's Law", "Faraday's Second Law", "Coulomb's Law"],
+    correct: "Faraday's Second Law"
+  },
+  {
+    question: "A wire loop is rotated in a magnetic field. What determines the frequency of the induced a.c. voltage?",
+    options: ["Field strength", "Loop diameter", "Angular velocity", "Number of turns"],
+    correct: "Angular velocity"
+  },
+  {
+    question: "The energy stored in a magnetic field of an inductor is given by:",
+    options: ["½LI²", "½CV²", "LIR", "½mv²"],
+    correct: "½LI²"
+  },
+  {
+    question: "Electric field lines always point:",
+    options: ["From negative to positive", "From positive to negative", "Toward higher potential", "Circularly around charge"],
+    correct: "From positive to negative"
+  },
+  {
+    question: "The electric field inside a conductor in electrostatic equilibrium is:",
+    options: ["Constant", "Zero", "Variable", "Equal to applied field"],
+    correct: "Zero"
+  },
+  {
+    question: "What is the unit of electric field strength?",
+    options: ["Newton per meter", "Coulomb per volt", "Volt per meter", "Ampere per volt"],
+    correct: "Volt per meter"
+  },
+  {
+    question: "The electric potential difference between two points in a field is the:",
+    options: ["Work done per unit mass", "Work done per unit charge", "Force per unit charge", "Energy per unit distance"],
+    correct: "Work done per unit charge"
+  },
+  {
+    question: "In a uniform electric field, the motion of a charged particle is:",
+    options: ["Linear", "Parabolic", "Circular", "Random"],
+    correct: "Parabolic"
+  },
+  {
+    question: "Coulomb's law is valid only for:",
+    options: ["Point charges at rest", "Moving charges", "Large spheres", "High temperatures"],
+    correct: "Point charges at rest"
+  },
+  {
+    question: "What happens to the capacitance if the distance between plates is doubled?",
+    options: ["Doubles", "Halves", "Remains same", "Becomes zero"],
+    correct: "Halves"
+  },
+  {
+    question: "The drift velocity of electrons in a wire is directly proportional to:",
+    options: ["Electric field", "Current squared", "Voltage", "Resistivity"],
+    correct: "Electric field"
+  },
+  {
+    question: "Ohm’s law fails in which of the following?",
+    options: ["Resistors", "Semiconductors", "Metal wires", "Insulators"],
+    correct: "Semiconductors"
+  },
+   {
+    question: "An electron (charge = 1.6 × 10⁻¹⁹ C) is accelerated from rest through a potential difference of 5000 V. What is its final speed? (mass of electron = 9.11 × 10⁻³¹ kg)",
+    options: ["4.2 × 10⁷ m/s", "1.3 × 10⁷ m/s", "6.7 × 10⁶ m/s", "2.0 × 10⁷ m/s"],
+    correct: "4.2 × 10⁷ m/s"
+  },
+  {
+    question: "A 10 m long wire carries a current of 5 A and is placed in a uniform magnetic field of 0.4 T making 30° angle. What is the magnetic force on the wire?",
+    options: ["10 N", "20 N", "25 N", "15 N"],
+    correct: "10 N"
+  },
+  {
+    question: "A coil of 200 turns and area 0.01 m² is placed in a magnetic field of 0.1 T. If the coil is rotated at 3000 rpm, what is the peak emf induced?",
+    options: ["188.5 V", "94.2 V", "282.7 V", "376.9 V"],
+    correct: "188.5 V"
+  },
+  {
+    question: "An RLC circuit has R = 10 Ω, L = 0.5 H, and C = 100 µF. What is the resonant frequency of the circuit?",
+    options: ["22.5 Hz", "225 Hz", "71.0 Hz", "100 Hz"],
+    correct: "71.0 Hz"
+  },
+  {
+    question: "Find the rms current in an a.c. circuit with peak voltage of 325 V and resistance of 50 Ω.",
+    options: ["4.6 A", "6.5 A", "7.3 A", "9.2 A"],
+    correct: "4.6 A"
+  },
+  {
+    question: "A proton moves at 3 × 10⁶ m/s perpendicular to a 0.2 T magnetic field. What is the radius of the circular path? (mass = 1.67 × 10⁻²⁷ kg, charge = 1.6 × 10⁻¹⁹ C)",
+    options: ["0.157 m", "0.156 m", "0.25 m", "0.20 m"],
+    correct: "0.157 m"
+  },
+  {
+    question: "Calculate the total impedance of an a.c. circuit with R = 6 Ω, L = 0.2 H, C = 100 µF at 50 Hz.",
+    options: ["6.4 Ω", "7.2 Ω", "8.0 Ω", "10.2 Ω"],
+    correct: "7.2 Ω"
+  },
+  {
+    question: "A charged particle of mass 5 × 10⁻⁶ kg and charge 2 × 10⁻⁶ C is placed in an electric field of 2 × 10⁴ N/C. What is its acceleration?",
+    options: ["8 × 10⁶ m/s²", "4 × 10⁶ m/s²", "2 × 10⁶ m/s²", "6 × 10⁶ m/s²"],
+    correct: "8 × 10⁶ m/s²"
+  },
+  {
+    question: "What is the induced emf when the magnetic flux through a 50-turn coil changes by 0.02 Wb in 0.01 s?",
+    options: ["100 V", "75 V", "50 V", "200 V"],
+    correct: "100 V"
+  },
+  {
+    question: "A circuit has a 60 W lamp connected to a 240 V supply. What resistance does the lamp offer?",
+    options: ["960 Ω", "480 Ω", "360 Ω", "240 Ω"],
+    correct: "960 Ω"
+  },
+  {
+    question: "In a transformer, the primary coil has 1000 turns and the secondary has 100 turns. If the input is 220 V, what is the output voltage?",
+    options: ["22 V", "44 V", "110 V", "100 V"],
+    correct: "22 V"
+  },
+  {
+    question: "Determine the energy stored in a 0.3 H inductor carrying 2.5 A current.",
+    options: ["0.94 J", "0.56 J", "0.88 J", "1.25 J"],
+    correct: "0.94 J"
+  },
+  {
+    question: "A capacitor of 20 µF is connected across a 100 V supply. What is the stored energy?",
+    options: ["0.1 J", "0.05 J", "0.2 J", "0.15 J"],
+    correct: "0.1 J"
+  },
+  {
+    question: "Find the time constant of a circuit with R = 2 kΩ and C = 100 µF.",
+    options: ["0.2 s", "0.5 s", "1 s", "2 s"],
+    correct: "0.2 s"
+  },
+  {
+    question: "A magnetic field changes uniformly from 0.4 T to 0 in 0.01 s over an area of 0.05 m². Find the induced emf in the loop.",
+    options: ["2 V", "1.5 V", "1 V", "0.5 V"],
+    correct: "2 V"
+  },
+  {
+    question: "What is the drift velocity of electrons in a copper wire of cross-section 1 mm² carrying 3 A? (n = 8.5 × 10²⁸ electrons/m³, e = 1.6 × 10⁻¹⁹ C)",
+    options: ["2.2 × 10⁻⁴ m/s", "4.4 × 10⁻⁴ m/s", "1.5 × 10⁻⁴ m/s", "3.5 × 10⁻⁴ m/s"],
+    correct: "2.2 × 10⁻⁴ m/s"
+  },
+  {
+    question: "A particle of charge 5 × 10⁻⁶ C moves 0.5 m in a uniform electric field of 2000 N/C. What is the work done?",
+    options: ["5 mJ", "10 mJ", "20 mJ", "15 mJ"],
+    correct: "5 mJ"
+  },
+  {
+    question: "Find the charge passing through a wire in 5 minutes if the current is 1.5 A.",
+    options: ["450 C", "600 C", "750 C", "300 C"],
+    correct: "450 C"
+  },
+  {
+    question: "The current in an inductor is increased from 0 to 3 A in 0.01 s, inducing 15 V across it. What is the inductance?",
+    options: ["0.05 H", "0.1 H", "0.15 H", "0.2 H"],
+    correct: "0.05 H"
+  },
+  {
+    question: "A coil of resistance 10 Ω is connected in series with a 50 µF capacitor to a 100 V, 60 Hz supply. What is the capacitive reactance and total impedance?",
+    options: ["53 Ω, 53.9 Ω", "45 Ω, 46.1 Ω", "60 Ω, 61.2 Ω", "50 Ω, 51.3 Ω"],
+    correct: "53 Ω, 53.9 Ω"
+  },
+  {
+    question: "In a series circuit of identical resistors, the potential difference across each resistor is:",
+    options: ["Equal", "Different", "Zero", "Half the supply"],
+    correct: "Equal"
+  },
+  {
+    question: "Power in a resistive d.c. circuit is given by:",
+    options: ["V/I", "I²R", "VR²", "V²/R²"],
+    correct: "I²R"
+  },
+  {
+    question: "Kirchhoff’s voltage law is based on:",
+    options: ["Charge conservation", "Energy conservation", "Mass conservation", "Power conservation"],
+    correct: "Energy conservation"
+  },
+  {
+    question: "Which of the following quantities alternates in an a.c. circuit?",
+    options: ["Resistance", "Reactance", "Current and voltage", "Capacitance"],
+    correct: "Current and voltage"
+  },
+  {
+    question: "Impedance in an a.c. circuit is the combination of:",
+    options: ["Resistance and capacitance only", "Reactance only", "Resistance and reactance", "Voltage and frequency"],
+    correct: "Resistance and reactance"
+  },
+  {
+    question: "The phase difference between current and voltage in a pure inductor is:",
+    options: ["Zero", "π/2 lead", "π/2 lag", "π"],
+    correct: "π/2 lag"
+  },
+  {
+    question: "The power factor in a purely resistive a.c. circuit is:",
+    options: ["Zero", "1", "Between 0 and 1", "Greater than 1"],
+    correct: "1"
+  },
+  {
+    question: "In a capacitive a.c. circuit, the current leads the voltage by:",
+    options: ["π", "π/2", "π/4", "Zero"],
+    correct: "π/2"
+  },
+  {
+    question: "The resonant frequency of an LCR circuit is given by:",
+    options: ["1/2π√(LC)", "2π√(LC)", "LC", "L/C"],
+    correct: "1/2π√(LC)"
+  },
+  {
+    question: "Power is dissipated in which a.c. circuit component?",
+    options: ["Capacitor", "Inductor", "Resistor", "Transformer"],
+    correct: "Resistor"
+  },
+  {
+    question: "A transformer works on the principle of:",
+    options: ["Electrostatics", "Magnetic field repulsion", "Mutual induction", "Capacitive coupling"],
+    correct: "Mutual induction"
+  }
+  ];
+
+  let current = 0;
+  let score = 0;
+  const userAnswers = [];
+  let timer;
+  let timeLeft = 50;
+
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  function typeWriter(id, text, done) {
+    let i = 0;
+    const el = document.getElementById(id);
+    el.innerHTML = '';
+    function typing() {
+      if (i < text.length) {
+        el.innerHTML += text.charAt(i++);
+        setTimeout(typing, 30);
+      } else {
+        done();
+      }
+    }
+    typing();
+  }
+
+  function startTimer() {
+    clearInterval(timer);
+    timeLeft = 50;
+    const timerEl = document.createElement("div");
+    timerEl.id = "timer";
+    timerEl.style.fontWeight = "bold";
+    document.getElementById("Review").prepend(timerEl);
+    document.getElementById("timer").innerText = `Time left: ${timeLeft}s`;
+    
+    
+    
+
+
+
+    
+    
+
+    timer = setInterval(() => {
+      timeLeft--;
+      document.getElementById("timer").innerText = `Time left: ${timeLeft}s`;
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        next();
+      }
+    }, 1000);
+  }
+
+  function stopTimer() {
+    clearInterval(timer);
+  }
+
+  function clearTimerDisplay() {
+    const timerEl = document.getElementById("timer");
+    if (timerEl) timerEl.remove();
+  }
+
+  function loadQuestion() {
+    const q = questions[current];
+    document.getElementById("Review").innerHTML = '';
+    typeWriter("Review", `Q${current + 1}. ${q.question}`, () => {
+      const box = document.createElement("div");
+      box.className = "question-box";
+
+      q.options.forEach((opt, idx) => {
+        box.innerHTML += `
+          <div class="option">
+            <input type="radio" id="opt${idx}" name="option" value="${opt}">
+            <label for="opt${idx}">${opt}</label>
+          </div>`;
+      });
+
+      box.innerHTML += `<button id="nextBtn">Next</button>`;
+      document.getElementById("Review").appendChild(box);
+      document.getElementById("nextBtn").addEventListener("click", next);
+      startTimer();
+    });
+  }
+
+  function next() {
+    stopTimer();
+    const selected = document.querySelector('input[name="option"]:checked');
+    const answer = selected ? selected.value : null;
+    userAnswers.push(answer);
+    if (answer === questions[current].correct) score++;
+    current++;
+    current < questions.length ? loadQuestion() : showScore();
+  }
+
+  function showScore() {
+    clearTimerDisplay();
+    let result = `<h3>You scored ${score} out of ${questions.length}</h3>`;
+    result += "<h4>Correct Answers:</h4><ol>";
+    questions.forEach((q, i) => {
+      result += `<li>${q.question}<br><strong>Answer:</strong> ${q.correct}</li>`;
+    });
+    result += "</ol>";
+    document.getElementById("Review").innerHTML = result;
+  }
+
+  // Prepare and shuffle questions
+  shuffle(questions);
+  const selectedQuestions = questions.slice(0, 20);
+  selectedQuestions.forEach(q => shuffle(q.options));
+  questions.length = 0;
+  questions.push(...selectedQuestions);
+
+  loadQuestion();
+};
+
+
+
+    function getPDF() {
+      typeWriterEffect("get", "Download latest PDF here:");
+    setTimeout(() => {
+        document.querySelector('.get').innerHTML += `\n<a href="Pdf-Documents.html">(Download PDF)</a>`;
+      }, 1200);}
+      
+      
+      
+      
+      function bioQuestions() {
+  const questions = [
+  {
+    question: "Which feature distinguishes amphibians from reptiles in terms of embryonic development?",
+    options: ["Absence of amniotic membrane in amphibians", "External fertilisation in reptiles", "Presence of scales in amphibians", "Direct development in amphibians"],
+    correct: "Absence of amniotic membrane in amphibians"
+  },
+  {
+    question: "Which structural adaptation enables gymnosperms to conserve water effectively?",
+    options: ["Sunken stomata and thick cuticle", "Broad leaves and extensive root hairs", "Large intercellular spaces", "Thin epidermis and hydrophilic mesophyll"],
+    correct: "Sunken stomata and thick cuticle"
+  },
+  {
+    question: "Which statement about chloroplasts in algae is true regarding pigment composition?",
+    options: ["Rhodophyta possess phycoerythrin which masks chlorophyll a", "Chlorophyta lack chlorophyll a and only have chlorophyll b", "Phaeophyta contain anthocyanin and xanthophyll as major pigments", "All algal divisions have identical pigment composition"],
+    correct: "Rhodophyta possess phycoerythrin which masks chlorophyll a"
+  },
+  {
+    question: "Which component of plant xylem is responsible for lateral water movement?",
+    options: ["Xylem parenchyma", "Vessel elements", "Tracheids", "Xylem fibres"],
+    correct: "Xylem parenchyma"
+  },
+  {
+    question: "What is the main morphological difference between poriferans and cnidarians?",
+    options: ["Presence of true tissues in cnidarians", "Presence of choanocytes in cnidarians", "Multicellularity in poriferans only", "Cnidarians are asymmetrical"],
+    correct: "Presence of true tissues in cnidarians"
+  },
+  {
+    question: "What feature best distinguishes angiosperm pollen grains?",
+    options: ["Presence of three germinal furrows or pores", "Spiral arrangement of microspores", "Diploid pollen nucleus", "Unicellular nature of pollen wall"],
+    correct: "Presence of three germinal furrows or pores"
+  },
+  {
+    question: "Which evolutionary trait allowed chordates to develop complex central nervous systems?",
+    options: ["Dorsal hollow nerve cord", "Ventral nerve cord", "Exoskeleton", "Segmented muscles"],
+    correct: "Dorsal hollow nerve cord"
+  },
+  {
+    question: "Which of the following is unique to angiosperm fertilisation?",
+    options: ["Double fertilisation producing endosperm", "Syngamy followed by mitosis", "Triple fusion forming zygote", "Pollination by wind"],
+    correct: "Double fertilisation producing endosperm"
+  },
+  {
+    question: "Which structural adaptation allows pteridophytes to survive in both terrestrial and moist environments?",
+    options: ["Presence of vascular tissue and flagellated sperm", "Lignified cell walls and absence of roots", "Cutinised leaves and unicellular rhizoids", "Lack of true leaves and homosporous sporangia"],
+    correct: "Presence of vascular tissue and flagellated sperm"
+  },
+  {
+    question: "Which of the following features is exclusive to gymnosperms among land plants?",
+    options: ["Naked seeds and presence of cones", "Alternation of generations", "Vascular tissues and chlorophyll", "Double fertilisation and endosperm formation"],
+    correct: "Naked seeds and presence of cones"
+  },
+  {
+    question: "In bryophytes, the gametophyte generation is dominant. What implication does this have on their life cycle?",
+    options: ["The sporophyte is nutritionally dependent on the gametophyte", "Meiosis occurs in the gametophyte", "The gametophyte is diploid and reproduces asexually", "Spores are formed directly from zygotes"],
+    correct: "The sporophyte is nutritionally dependent on the gametophyte"
+  },
+  {
+    question: "Which morphological feature distinguishes annelids from nematodes?",
+    options: ["Segmentation and presence of true coelom", "Pseudocoelom and bilateral symmetry", "Jointed appendages and chitinous exoskeleton", "Radial symmetry and absence of body cavity"],
+    correct: "Segmentation and presence of true coelom"
+  },
+  {
+    question: "What evolutionary advantage is associated with the development of seeds in gymnosperms and angiosperms?",
+    options: ["Protection and nourishment of the embryo", "Faster photosynthesis", "Increased vegetative propagation", "Reduced dependency on pollination"],
+    correct: "Protection and nourishment of the embryo"
+  },
+  {
+    question: "In which phylum does the water vascular system serve both locomotion and food capture?",
+    options: ["Echinodermata", "Cnidaria", "Mollusca", "Arthropoda"],
+    correct: "Echinodermata"
+  },
+  {
+    question: "Why are algae considered polyphyletic in origin?",
+    options: ["They originate from multiple ancestral lineages", "They all share the same chlorophyll pigment", "They exhibit similar reproductive cycles", "They all have true roots and stems"],
+    correct: "They originate from multiple ancestral lineages"
+  },
+  {
+    question: "What key feature differentiates monocotyledons from dicotyledons in angiosperms?",
+    options: ["Parallel venation and scattered vascular bundles", "Reticulate venation and fibrous roots", "Two cotyledons and flower parts in threes", "Vascular cambium and adventitious roots"],
+    correct: "Parallel venation and scattered vascular bundles"
+  },
+  {
+    question: "Which of the following plant divisions exhibits a true alternation of generations and dominant sporophyte?",
+    options: ["Pteridophyta", "Bryophyta", "Algae", "Fungi"],
+    correct: "Pteridophyta"
+  },
+  {
+    question: "Which class of molluscs shows a highly developed nervous system and complex eyes comparable to vertebrates?",
+    options: ["Cephalopoda", "Gastropoda", "Bivalvia", "Scaphopoda"],
+    correct: "Cephalopoda"
+  },
+  {
+    question: "In echinoderms, the larval form exhibits which type of symmetry, unlike the adult?",
+    options: ["Bilateral symmetry", "Radial symmetry", "Asymmetry", "Spherical symmetry"],
+    correct: "Bilateral symmetry"
+  },
+  {
+    question: "Which of these features best supports the classification of reptiles as amniotes?",
+    options: ["Presence of shelled eggs and embryonic membranes", "Cold-blooded nature", "Lung-based respiration", "Scaly skin"],
+    correct: "Presence of shelled eggs and embryonic membranes"
+  },
+  {
+    question: "What characteristic makes amphibians the link between aquatic and terrestrial vertebrates?",
+    options: ["Dual life stages with gills and lungs", "Moist skin for respiration", "Ability to regenerate limbs", "Presence of scales"],
+    correct: "Dual life stages with gills and lungs"
+  },
+  {
+    question: "Which plant group has seeds enclosed in fruit, a feature not found in any other group?",
+    options: ["Angiosperms", "Gymnosperms", "Pteridophytes", "Bryophytes"],
+    correct: "Angiosperms"
+  },
+  {
+    question: "In which animal phylum do you find a pseudocoelom and a complete digestive system?",
+    options: ["Nematoda", "Porifera", "Annelida", "Platyhelminthes"],
+    correct: "Nematoda"
+  },
+  {
+    question: "Which of the following characteristics are shared by all chordates at some stage in their development?",
+    options: ["Notochord, pharyngeal slits, dorsal hollow nerve cord, and post-anal tail", "Gills, fins, vertebrae, and closed circulatory system", "Exoskeleton, segmentation, and radial symmetry", "Two-chambered heart, lungs, and feathers"],
+    correct: "Notochord, pharyngeal slits, dorsal hollow nerve cord, and post-anal tail"
+  },
+  {
+    question: "Which tissue in plants is responsible for secondary growth and formation of wood?",
+    options: ["Vascular cambium", "Xylem parenchyma", "Phloem fibres", "Epidermis"],
+    correct: "Vascular cambium"
+  },
+  {
+    question: "Which of these animal groups undergo complete metamorphosis?",
+    options: ["Insects like butterflies", "Amphibians like frogs", "Reptiles like lizards", "Fish like salmon"],
+    correct: "Insects like butterflies"
+  },
+  {
+    question: "Which of the following is a distinguishing feature of dicot root anatomy?",
+    options: ["Xylem arranged in a star-shaped pattern", "Scattered vascular bundles", "Presence of bulliform cells", "Large pith and reduced cortex"],
+    correct: "Xylem arranged in a star-shaped pattern"
+  },
+  {
+    question: "Which algae are known to deposit calcium carbonate in their cell walls?",
+    options: ["Red algae (Rhodophyta)", "Green algae (Chlorophyta)", "Brown algae (Phaeophyta)", "Blue-green algae (Cyanobacteria)"],
+    correct: "Red algae (Rhodophyta)"
+  },
+  {
+    question: "In plants, the Casparian strip is a feature of which tissue?",
+    options: ["Endodermis", "Pericycle", "Phloem", "Xylem"],
+    correct: "Endodermis"
+  },
+  {
+    question: "Which class of arthropods is entirely aquatic and has biramous appendages?",
+    options: ["Crustacea", "Insecta", "Arachnida", "Myriapoda"],
+    correct: "Crustacea"
+  },
+  {
+    question: "Which of the following correctly matches the plant group with the dominant generation?",
+    options: ["Bryophyta – Gametophyte", "Gymnosperms – Gametophyte", "Angiosperms – Gametophyte", "Pteridophyta – Gametophyte"],
+    correct: "Bryophyta – Gametophyte"
+  },
+  {
+    question: "Which of the following animal groups is considered the most primitive to exhibit bilateral symmetry?",
+    options: ["Platyhelminthes", "Cnidaria", "Porifera", "Echinodermata"],
+    correct: "Platyhelminthes"
+  },
+  {
+    question: "Which feature differentiates true roots in vascular plants from rhizoids in non-vascular plants?",
+    options: ["Presence of vascular tissue in roots", "Rhizoids being multicellular", "Both produce seeds", "Roots being photosynthetic"],
+    correct: "Presence of vascular tissue in roots"
+  },
+  {
+    question: "In angiosperms, which tissue is responsible for translocation of organic nutrients?",
+    options: ["Phloem", "Xylem", "Collenchyma", "Parenchyma"],
+    correct: "Phloem"
+  },
+  {
+    question: "Which group of animals lacks a true coelom and exhibits tissue-level organisation?",
+    options: ["Platyhelminthes", "Annelida", "Arthropoda", "Chordata"],
+    correct: "Platyhelminthes"
+  },
+  {
+    question: "Which gymnosperm structure functions as the female gametophyte-bearing organ?",
+    options: ["Ovulate cone", "Antheridia", "Ovary", "Stigma"],
+    correct: "Ovulate cone"
+  },
+  {
+    question: "Which of these plants exhibits heterospory and seeds but lacks fruits?",
+    options: ["Gymnosperms", "Angiosperms", "Pteridophytes", "Bryophytes"],
+    correct: "Gymnosperms"
+  },
+  {
+    question: "Which cell type in animals is primarily responsible for immune responses and engulfing pathogens?",
+    options: ["Macrophages", "Erythrocytes", "Fibroblasts", "Neurons"],
+    correct: "Macrophages"
+  },
+  {
+    question: "Why are fungi not classified as plants despite having cell walls?",
+    options: ["They are heterotrophic and lack chlorophyll", "They reproduce only sexually", "They contain cellulose in their walls", "They produce spores only in moist environments"],
+    correct: "They are heterotrophic and lack chlorophyll"
+  },
+  {
+    question: "In which plant tissue do Casparian strips form a barrier to passive flow of materials?",
+    options: ["Endodermis", "Pericycle", "Cortex", "Pith"],
+    correct: "Endodermis"
+  },
+  {
+    question: "What classifies an animal as a protostome rather than a deuterostome?",
+    options: ["The blastopore develops into the mouth", "It has a notochord during development", "It possesses radial cleavage", "The mesoderm forms from outpouchings of the archenteron"],
+    correct: "The blastopore develops into the mouth"
+  },
+  {
+    question: "Which anatomical feature of dicots aids in secondary growth but is absent in most monocots?",
+    options: ["Vascular cambium", "Endodermis", "Phloem parenchyma", "Apical meristem"],
+    correct: "Vascular cambium"
+  },
+  {
+    question: "Which animal class includes organisms with a three-chambered heart and cold-blooded metabolism?",
+    options: ["Amphibia", "Aves", "Mammalia", "Agnatha"],
+    correct: "Amphibia"
+  },
+  {
+    question: "Which structure in flowering plants directly facilitates double fertilisation?",
+    options: ["Pollen tube", "Stigma", "Ovary", "Anther"],
+    correct: "Pollen tube"
+  },
+  {
+    question: "Which phylum includes exclusively marine animals that lack bilateral symmetry as adults?",
+    options: ["Echinodermata", "Annelida", "Mollusca", "Cnidaria"],
+    correct: "Echinodermata"
+  },
+  {
+    question: "What is the correct evolutionary sequence of plant groups from simplest to most complex?",
+    options: ["Algae → Bryophytes → Pteridophytes → Gymnosperms → Angiosperms", "Bryophytes → Algae → Angiosperms → Gymnosperms → Pteridophytes", "Algae → Pteridophytes → Bryophytes → Gymnosperms → Angiosperms", "Bryophytes → Algae → Pteridophytes → Angiosperms → Gymnosperms"],
+    correct: "Algae → Bryophytes → Pteridophytes → Gymnosperms → Angiosperms"
+  },
+  {
+    question: "Which vascular bundle arrangement is typical of monocot stems?",
+    options: ["Scattered vascular bundles", "Ring-shaped vascular bundles", "Concentrated around the pith", "Only present in the cortex"],
+    correct: "Scattered vascular bundles"
+  },
+  {
+    question: "Which morphological feature in animals is indicative of a more active lifestyle?",
+    options: ["Closed circulatory system", "Pseudocoelom", "Radial symmetry", "Sessility"],
+    correct: "Closed circulatory system"
+  },
+  {
+    question: "Which gymnosperm structure is analogous to the ovary of angiosperms in reproductive function?",
+    options: ["Ovulate cone", "Antheridia", "Megasporangium", "Stigma"],
+    correct: "Ovulate cone"
+  },
+  {
+    question: "Which feature is used to categorise plants as cryptogams?",
+    options: ["Lack of seeds and flowers", "Production of visible flowers", "Presence of vascular tissues only", "Seed development inside cones"],
+    correct: "Lack of seeds and flowers"
+  }
+  ];
+
+  let current = 0;
+  let score = 0;
+  const userAnswers = [];
+  let timer;
+  let timeLeft = 50;
+
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  function typeWriter(id, text, done) {
+    let i = 0;
+    const el = document.getElementById(id);
+    el.innerHTML = '';
+    function typing() {
+      if (i < text.length) {
+        el.innerHTML += text.charAt(i++);
+        setTimeout(typing, 30);
+      } else {
+        done();
+      }
+    }
+    typing();
+  }
+
+  function startTimer() {
+    clearInterval(timer);
+    timeLeft = 50;
+    const timerEl = document.createElement("div");
+    timerEl.id = "timer";
+    timerEl.style.fontWeight = "bold";
+    document.getElementById("Review").prepend(timerEl);
+    document.getElementById("timer").innerText = `Time left: ${timeLeft}s`;
+    
+    
+    
+
+
+
+    
+    
+
+    timer = setInterval(() => {
+      timeLeft--;
+      document.getElementById("timer").innerText = `Time left: ${timeLeft}s`;
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        next();
+      }
+    }, 1000);
+  }
+
+  function stopTimer() {
+    clearInterval(timer);
+  }
+
+  function clearTimerDisplay() {
+    const timerEl = document.getElementById("timer");
+    if (timerEl) timerEl.remove();
+  }
+
+  function loadQuestion() {
+    const q = questions[current];
+    document.getElementById("Review").innerHTML = '';
+    typeWriter("Review", `Q${current + 1}. ${q.question}`, () => {
+      const box = document.createElement("div");
+      box.className = "question-box";
+
+      q.options.forEach((opt, idx) => {
+        box.innerHTML += `
+          <div class="option">
+            <input type="radio" id="opt${idx}" name="option" value="${opt}">
+            <label for="opt${idx}">${opt}</label>
+          </div>`;
+      });
+
+      box.innerHTML += `<button id="nextBtn">Next</button>`;
+      document.getElementById("Review").appendChild(box);
+      document.getElementById("nextBtn").addEventListener("click", next);
+      startTimer();
+    });
+  }
+
+  function next() {
+    stopTimer();
+    const selected = document.querySelector('input[name="option"]:checked');
+    const answer = selected ? selected.value : null;
+    userAnswers.push(answer);
+    if (answer === questions[current].correct) score++;
+    current++;
+    current < questions.length ? loadQuestion() : showScore();
+  }
+
+  function showScore() {
+    clearTimerDisplay();
+    let result = `<h3>You scored ${score} out of ${questions.length}</h3>`;
+    result += "<h4>Correct Answers:</h4><ol>";
+    questions.forEach((q, i) => {
+      result += `<li>${q.question}<br><strong>Answer:</strong> ${q.correct}</li>`;
+    });
+    result += "</ol>";
+    document.getElementById("Review").innerHTML = result;
+  }
+
+  // Prepare and shuffle questions
+  shuffle(questions);
+  const selectedQuestions = questions.slice(0, 20);
+  selectedQuestions.forEach(q => shuffle(q.options));
+  questions.length = 0;
+  questions.push(...selectedQuestions);
+
+  loadQuestion();
+};
+
+      
+      
+
+    function clearConvo() {
+      document.getElementById("Review").innerHTML = '';
+      
+question = function() {
+  return "";
+};
+      document.querySelector('.chat').innerHTML = '';
+      document.querySelector('.get').innerHTML = '';
+    }
+    function logoutUser() {
+  localStorage.clear();
+  window.location.href = "index.html";
+}
+
+  </script>
+</body>
+</html>

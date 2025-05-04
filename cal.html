@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GPA Calculator</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    :root {
+      --bg-color: #fff;
+      --text-color: #000;
+      --error-color: red;
+      --card-color: #f9f9f9;
+    }
+
+    body.dark {
+      --bg-color: #121212;
+      --text-color: #eee;
+      --card-color: #1e1e1e;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h2, h4 {
+      text-align: center;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .courseInput {
+      background: var(--card-color);
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin: 6px 0 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    input.error {
+      border-color: var(--error-color);
+    }
+
+    .error-message {
+      color: var(--error-color);
+      font-size: 0.85em;
+      margin-top: -8px;
+      margin-bottom: 8px;
+    }
+
+    button {
+      margin: 10px 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      border: none;
+    }
+
+    #gpaResult {
+      text-align: center;
+      font-size: 1.6em;
+      margin-top: 20px;
+    }
+
+    .green { color: green; }
+    .orange { color: orange; }
+    .red { color: red; }
+
+    .scale-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+    }
+
+    .scale-table th, .scale-table td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .scale-table th {
+      background-color: #eee;
+    }
+
+    .dark .scale-table th {
+      background-color: #333;
+    }
+
+    .buttons {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .toggle-switch {
+      float: right;
+      margin-top: -50px;
+    }
+
+    @media (max-width: 600px) {
+      .toggle-switch {
+        float: none;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="pdfSection">
+    <h2>GPA Calculator</h2>
+
+    <div class="toggle-switch">
+      <label>
+        <input type="checkbox" id="darkToggle" onchange="toggleDarkMode()"/>
+        Dark Mode
+      </label>
+    </div>
+
+    <form id="gpaForm" novalidate>
+      <div id="courseInputs"></div>
+
+      <div class="buttons">
+        <button type="button" onclick="addCourse()">+ Add Course</button>
+        <button type="button" onclick="removeCourse()">- Remove Course</button>
+        <button type="button" onclick="calculateGPA()">Calculate GPA</button>
+        <button type="button" onclick="downloadPDF()">Save as PDF</button>
+      </div>
+    </form>
+
+    <h3 id="gpaResult"></h3>
+
+    <h3>GPA Grading Scale</h3>
+    <table class="scale-table">
+      <tr><th>Grade</th><th>Points</th></tr>
+      <tr><td>A</td><td>5.0</td></tr>
+      <tr><td>B</td><td>4.0</td></tr>
+      <tr><td>C</td><td>3.0</td></tr>
+      <tr><td>D</td><td>2.0</td></tr>
+      <tr><td>E</td><td>1.0</td></tr>
+      <tr><td>F</td><td>0.0</td></tr>
+    </table>
+  </div>
+
+  <script>
+    const grades = {
+      "A": 5.0,
+      "B": 4.0,
+      "C": 3.0,
+      "D": 2.0,
+      "E": 1.0,
+      "F": 0.0
+    };
+
+    let courseCount = 0;
+    const defaultCourses = ["CHM 101", "PHY 101", "MTH 101", "GNS 101"];
+
+    window.onload = () => {
+      defaultCourses.forEach(title => addCourse(title));
+    };
+
+    function addCourse(title = `Course ${courseCount + 1}`) {
+      courseCount++;
+      const container = document.getElementById("courseInputs");
+
+      const div = document.createElement("div");
+      div.className = "courseInput";
+      div.id = `course${courseCount}`;
+      div.innerHTML = `
+        <h4>${title}</h4>
+        <input type="text" id="grade${courseCount}" placeholder="Grade (A-F)" required>
+        <div class="error-message" id="grade${courseCount}-error"></div>
+        <input type="number" id="credit${courseCount}" placeholder="Units" required>
+        <div class="error-message" id="credit${courseCount}-error"></div>
+      `;
+
+      container.appendChild(div);
+    }
+
+    function removeCourse() {
+      if (courseCount > 1) {
+        const course = document.getElementById(`course${courseCount}`);
+        course.remove();
+        courseCount--;
+      }
+    }
+
+    function calculateGPA() {
+      let totalCredits = 0;
+      let weightedGrades = 0;
+      let isValid = true;
+
+      for (let i = 1; i <= courseCount; i++) {
+        const gradeInput = document.getElementById(`grade${i}`);
+        const creditInput = document.getElementById(`credit${i}`);
+        const gradeError = document.getElementById(`grade${i}-error`);
+        const creditError = document.getElementById(`credit${i}-error`);
+
+        const grade = gradeInput.value.trim().toUpperCase();
+        const credit = parseInt(creditInput.value);
+
+        gradeInput.classList.remove("error");
+        creditInput.classList.remove("error");
+        gradeError.textContent = "";
+        creditError.textContent = "";
+
+        if (!grades.hasOwnProperty(grade)) {
+          gradeInput.classList.add("error");
+          gradeError.textContent = "Invalid grade (A-F)";
+          isValid = false;
+        }
+
+        if (isNaN(credit) || credit <= 0) {
+          creditInput.classList.add("error");
+          creditError.textContent = "Invalid credit hour";
+          isValid = false;
+        }
+
+        if (isValid) {
+          totalCredits += credit;
+          weightedGrades += grades[grade] * credit;
+        }
+      }
+
+      const result = document.getElementById("gpaResult");
+      if (isValid && totalCredits > 0) {
+        const gpa = weightedGrades / totalCredits;
+        let colour = gpa >= 4.5 ? 'green' : gpa >= 2.5 ? 'orange' : 'red';
+        result.className = colour;
+        result.textContent = `Your GPA is: ${gpa.toFixed(2)}`;
+      } else {
+        result.className = "red";
+        result.textContent = "Please correct the highlighted fields.";
+      }
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark");
+    }
+
+    function downloadPDF() {
+      const element = document.getElementById("pdfSection");
+      html2pdf().from(element).save("GPA_Result.pdf");
+    }
+  </script>
+</body>
+</html>
