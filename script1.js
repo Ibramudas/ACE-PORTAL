@@ -4,7 +4,7 @@ if (document.getElementById('register-form')) {
       e.preventDefault();
       const Name = document.getElementById('Name').value;
       const email = document.getElementById('email').value;
-      const phoneNumber = document.getElementById('Number').value;
+      const phoneNumber = document.getElementById('phoneNumber').value;
       const Password = document.getElementById('Password').value;
       const confirmPassword = document.getElementById("confirmPassword").value;
 
